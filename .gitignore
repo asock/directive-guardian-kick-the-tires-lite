@@ -1,0 +1,8 @@
+# Runtime artifacts (generated in ~/.openclaw/memory/, not in repo)
+directive-guardian.log
+directives.sha256
+directives.md.bak
+directives.*.md.bak
+directives.pre-restore.bak
+directives-export.json
+.guardian.lock
