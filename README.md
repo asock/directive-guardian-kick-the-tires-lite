@@ -22,10 +22,13 @@ AI agents forget. Context windows rotate. Sessions reset. Your carefully taught 
 
 ## Install
 
-Copy the `directive-guardian/` folder into your OpenClaw skills directory:
+Clone this repo into your OpenClaw skills directory (the repo root *is*
+the skill):
 
 ```bash
-cp -r directive-guardian ~/.openclaw/skills/
+git clone https://github.com/asock/directive-guardian-kick-the-tires-lite \
+  ~/.openclaw/skills/directive-guardian
+chmod +x ~/.openclaw/skills/directive-guardian/scripts/*.sh
 ```
 
 Add it to your agent's boot sequence or reference it in your system prompt.
@@ -123,14 +126,24 @@ Your agent should respond to these naturally:
 bash tests/test_guardian.sh
 ```
 
-45 tests covering bootstrap, CRUD, filtering, parsing, enable/disable, edit, search, remove, validation, input sanitization, backup/restore, JSON escape regression, checksum, export, and status dashboard.
+69 tests covering bootstrap, CRUD, filtering, parsing, enable/disable,
+edit, search, remove, validation, input sanitization, backup/restore,
+export/import, checksum/integrity, log rotation, the status dashboard,
+and explicit regressions for every bug catalogued in `AUDIT.md`
+(BUG-001..004, SEC-001..005, FEAT-001..007).
 
 ## Environment
 
-| Variable              | Default                  | Description             |
-|-----------------------|--------------------------|-------------------------|
-| `OPENCLAW_MEMORY_DIR` | `~/.openclaw/memory`     | Registry location       |
-| `GUARDIAN_DRY_RUN`    | `false`                  | Skip checksum updates   |
+| Variable                 | Default              | Description                            |
+|--------------------------|----------------------|----------------------------------------|
+| `OPENCLAW_MEMORY_DIR`    | `~/.openclaw/memory` | Registry location                      |
+| `GUARDIAN_DRY_RUN`       | `false`              | Skip checksum updates                  |
+| `GUARDIAN_STRICT`        | `false`              | Exit non-zero on integrity mismatch    |
+| `GUARDIAN_LOCK_TIMEOUT`  | `10`                 | Lock wait in seconds                   |
+| `GUARDIAN_LOG_MAX_LINES` | `500`                | Log rotation threshold                 |
+| `GUARDIAN_QUIET`         | `false`              | Suppress guardian stderr warnings      |
+| `GUARDIAN_YES`           | `false`              | Skip confirm prompts on destructive ops|
+| `NO_COLOR`               | unset                | Disable ANSI color in `directive-ctl`  |
 
 ## Optional Dependencies
 
